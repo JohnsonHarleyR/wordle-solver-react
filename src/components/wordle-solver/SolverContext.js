@@ -10,6 +10,7 @@ const SolverProvider = ({children}) => {
     const [rounds, setRounds] = useState([]);
     const [roundIndex, setRoundIndex] = useState(null);
     const [guesses, setGuesses] = useState(getEmptyGuesses());
+    const [guessIndex, setGuessIndex] = useState(null);
 
     const [userRound, setUserRound] = useState(null);
     const [correctAnswer, setCorrectAnswer] = useState(null);
@@ -106,11 +107,11 @@ const SolverProvider = ({children}) => {
         <SolverContext.Provider value={{solveMode, addedRound, 
             currentRound, guesses, rounds, roundIndex, userRound,
             userIsGuessing, correctAnswer, userMessage,
-            userRoundFinished,
+            userRoundFinished, guessIndex,
         setSolveMode, setAddedRound, setCurrentRound, setGuesses, 
         setRounds, setRoundIndex, resetRounds, setUserRound,
         setUserIsGuessing, setCorrectAnswer, setUserMessage,
-        setUserRoundFinished, startNewUserRound}}>
+        setUserRoundFinished, startNewUserRound, setGuessIndex}}>
             {children}
         </SolverContext.Provider>
     )

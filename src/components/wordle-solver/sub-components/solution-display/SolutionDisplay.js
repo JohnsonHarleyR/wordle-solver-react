@@ -3,6 +3,7 @@ import { SolverContext, getEmptyGuesses, getEmptyGuess } from '../../SolverConte
 import { Solution } from '../../styling/Styles';
 import GuessRow from './GuessRow';
 import UserMessage from './UserMessage';
+import GuessChanger from './GuessChanger';
 
 const SolutionDisplay = () => {
 
@@ -33,6 +34,7 @@ const SolutionDisplay = () => {
         <Solution>
             {rows}
             <UserMessage />
+            <GuessChanger />
         </Solution>
     );
 }
