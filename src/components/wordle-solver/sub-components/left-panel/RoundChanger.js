@@ -7,7 +7,8 @@ const RoundChanger = () => {
     const nextButton = useRef();
     const {rounds, roundIndex, setRoundIndex,
          resetRounds, userIsGuessing, userRound,
-        setCurrentRound, currentRound} = useContext(SolverContext);
+        setCurrentRound, userRoundFinished,
+        currentRound, setUserMessage} = useContext(SolverContext);
 
     const nextRound = () => {
         let roundCount = rounds.length;
@@ -18,6 +19,7 @@ const RoundChanger = () => {
             roundIndex === roundCount - 1) {
             setCurrentRound(userRound);
             nextButton.current.disabled = true;
+            setUserMessage(`Play a round yourself!`);
         }
     }
 
@@ -25,6 +27,11 @@ const RoundChanger = () => {
         if (roundIndex !== 0 && !userIsGuessing) {
             if (userRound != null && currentRound === userRound) {
                 setCurrentRound(rounds[roundIndex]);
+                if (!rounds[roundIndex].didWin) {
+                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}"`);
+                } else {
+                    setUserMessage(`Winner.`);
+                }
             } else {
                 setRoundIndex(roundIndex - 1);
             }
@@ -41,6 +48,13 @@ const RoundChanger = () => {
         } else if (userRound !== null && 
             roundIndex === rounds.length - 1 && 
             currentRound === userRound) {
+                if (!userIsGuessing && userRound !== null && 
+                    rounds.length === 1 && userIsGuessing) {
+                        return (roundIndex + 1);
+                    }
+                if (userIsGuessing && userRoundFinished) {
+                    return (roundIndex + 1);
+                }
             return (roundIndex + 2);
         } else {
             return (roundIndex + 1);

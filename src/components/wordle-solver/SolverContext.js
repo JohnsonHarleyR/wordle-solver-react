@@ -53,6 +53,13 @@ const SolverProvider = ({children}) => {
     useEffect(() => {
         if (roundIndex !== null) {
             setCurrentRound(rounds[roundIndex]);
+            if (rounds[roundIndex].isFinished) {
+                if (!rounds[roundIndex].didWin) {
+                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}"`);
+                } else {
+                    setUserMessage(`Winner.`);
+                }
+            }
         }
     }, [roundIndex]);
 
@@ -63,8 +70,10 @@ const SolverProvider = ({children}) => {
             if (roundIndex !== null) {
                 setCurrentRound(rounds[roundIndex]);
             }
+            setUserMessage("Enter a word for the computer to guess.");
         } else {
             getRandomAnswer(setCorrectAnswer);
+            setUserMessage("Play a round yourself!");
         }
     }, [solveMode]);
 

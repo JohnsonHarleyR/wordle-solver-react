@@ -15,7 +15,7 @@ export const checkIfWordExists = (word, setFunction) => {
 
 export const getRandomAnswer = (setFunction) => {
     console.log('getting an answer to solve');
-    FetchData(`${startUrl}/Wordles/GetRandomWord`, 
+    FetchData(`${startUrl}/Wordles/GetRandomGuessWord`, 
     setFunction, "Could not get random answer.");
 }
 

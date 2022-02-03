@@ -53,10 +53,12 @@ const AnswerInput = () => {
         if (solveMode === 'computer') {
             setButtonText('Solve');
             setUserGuess(null);
+            inputRef.current.placeholder="Enter word for the computer to guess";
         } else {
             setSolveWord(null);
             setButtonText('Guess');
             inputRef.current.value = "";
+            inputRef.current.placeholder="Guess an answer";
         }
     }, [solveMode]);
 
@@ -83,11 +85,11 @@ const AnswerInput = () => {
                 roundCopy.isFinished = true;
                 setUserRoundFinished(true);
 
-                let newMessage = "Round complete! ";
+                let newMessage = "Round complete. ";
                 if (roundCopy.didWin) {
                     newMessage += "You win!";
                 } else {
-                    newMessage += "You are out of guesses.";
+                    newMessage += `You are out of guesses. The answer was ${roundCopy.correctAnswer}`;
                 }
                 setUserMessage(newMessage);
 
@@ -150,7 +152,7 @@ const AnswerInput = () => {
 
     return (
         <>
-            <input type="text" ref={inputRef} placeholder="truck"/>
+            <input type="text" ref={inputRef} placeholder="Enter a word for the computer to guess"/>
             <button onClick={solveForAnswer}>{buttonText}</button>
             <p>{errorMessage}</p>
         </>
