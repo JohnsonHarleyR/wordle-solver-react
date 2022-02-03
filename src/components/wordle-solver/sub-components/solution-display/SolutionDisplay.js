@@ -2,11 +2,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import { SolverContext, getEmptyGuesses, getEmptyGuess } from '../../SolverContext';
 import { Solution } from '../../styling/Styles';
 import GuessRow from './GuessRow';
+import UserMessage from './UserMessage';
 
 const SolutionDisplay = () => {
 
 
-    const {currentRound, guesses, setGuesses} = useContext(SolverContext);
+    const {currentRound, guesses, 
+        setGuesses, userMessage} = useContext(SolverContext);
     const [rows, setRows] = useState(getRows(currentRound, guesses));
 
     useEffect(() => {
@@ -15,8 +17,10 @@ const SolutionDisplay = () => {
             setGuesses(getEmptyGuesses());
             console.log('round null');
         } else {
-            setGuesses(currentRound.guesses);
-            console.log(currentRound);
+            if (currentRound !== undefined) {
+                setGuesses(currentRound.guesses);
+                console.log(currentRound);
+            }
         }
     }, [currentRound]);
 
@@ -28,6 +32,7 @@ const SolutionDisplay = () => {
     return (
         <Solution>
             {rows}
+            <UserMessage />
         </Solution>
     );
 }
@@ -35,7 +40,7 @@ const SolutionDisplay = () => {
 const getRows = (currentRound, guesses) => {
     let rows = [];
 
-    if (guesses!= null)
+    if (guesses != null)
     {
         guesses.forEach(g => {
             rows.push(

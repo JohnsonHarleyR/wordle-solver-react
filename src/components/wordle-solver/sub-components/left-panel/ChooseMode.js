@@ -5,14 +5,17 @@ const ChooseMode = () => {
 
     const computerButton = useRef();
     const userButton = useRef();
-    const {solveMode, setSolveMode} = useContext(SolverContext);
+    const {solveMode, setSolveMode,
+        setUserMessage} = useContext(SolverContext);
 
     const computerMode = () => {
         setSolveMode('computer');
+        setUserMessage("Enter a word for the computer to guess.");
     }
 
     const userMode = () => {
         setSolveMode('user');
+        setUserMessage("Your turn to guess!\nOnce you guess, the round has started.");
     }
 
     useEffect(() => {

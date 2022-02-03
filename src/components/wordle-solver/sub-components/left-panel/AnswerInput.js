@@ -1,17 +1,24 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { SolverContext } from '../../SolverContext';
-import { getWordleGuesses, checkIfWordExists } from '../../ApiCaller';
+import { getEmptyGuesses, SolverContext } from '../../SolverContext';
+import { getWordleGuesses, checkIfWordExists,
+     getGuessResults, getRandomAnswer } from '../../ApiCaller';
 
 const AnswerInput = () => {
 
     let inputRef = useRef();
 
-    const {addedRound, setAddedRound, solveMode} = useContext(SolverContext);
+    const {addedRound, setAddedRound, solveMode, setRoundIndex,
+    userRound, setUserRound, correctAnswer, rounds, setRounds,
+    guesses, setGuesses, setUserIsGuessing, setUserMessage,
+    setCorrectAnswer, userIsGuessing, setUserRoundFinished
+    } = useContext(SolverContext);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [solveWord, setSolveWord] = useState(null);
     const [doesWordExist, setDoesWordExist] = useState(null);
     const [buttonText, setButtonText] = useState("Solve");
+
+    const [userGuess, setUserGuess] = useState(null);
 
     useEffect(() => {
         if (doesWordExist !== null) {
@@ -23,7 +30,11 @@ const AnswerInput = () => {
                 setErrorMessage("Not a valid word. Please choose another.");
             } else {
                 setErrorMessage("");
-                getWordleGuesses(solveWord, setAddedRound);
+                if (solveMode === 'computer') {
+                    getWordleGuesses(solveWord, setAddedRound);
+                } else {
+                    makeGuess(solveWord);
+                }
             }
         }
 
@@ -37,13 +48,81 @@ const AnswerInput = () => {
         }
     }, [addedRound]);
 
+    // These next two revolve around a user game
     useEffect(() => {
         if (solveMode === 'computer') {
             setButtonText('Solve');
+            setUserGuess(null);
         } else {
+            setSolveWord(null);
             setButtonText('Guess');
+            inputRef.current.value = "";
         }
     }, [solveMode]);
+
+    useEffect(() => { // TODO move starting a user round to method inside context
+        if (userGuess !== null) {
+            // set the guess index
+            let guessIndex = userRound.guesses.length;
+            userGuess.guessNumber = guessIndex + 1;
+
+            let roundCopy = {...userRound};
+            let guessesCopy = [...guesses];
+
+            guessesCopy.push(userGuess);
+            setGuesses(guessesCopy);
+
+            roundCopy.guessCount++;
+            roundCopy.guesses.push(userGuess);
+            if (userGuess.isCorrect) {
+                roundCopy.didWin = true;
+            }
+
+            // once the user is done with a round
+            if (roundCopy.didWin || roundCopy.guesses.length >= 6) {
+                roundCopy.isFinished = true;
+                setUserRoundFinished(true);
+
+                let newMessage = "Round complete! ";
+                if (roundCopy.didWin) {
+                    newMessage += "You win!";
+                } else {
+                    newMessage += "You are out of guesses.";
+                }
+                setUserMessage(newMessage);
+
+                // add it to rounds, set the index to the new round
+                // setAddedRound(roundCopy);
+
+                // let roundsCopy = [...rounds];
+                // roundsCopy.push(roundCopy);
+                // setRounds(roundsCopy);
+                // setGuesses(roundCopy.guesses);
+                // setRoundIndex(roundsCopy.length - 1);
+
+                //make the user round null, as well as answer, 
+                //and set isguessing to false
+
+                // setUserRound(null);
+                // setUserIsGuessing(false);
+                // // get a new word if they want to start again
+                // setCorrectAnswer(getRandomAnswer(setCorrectAnswer));
+                
+            }
+
+            setUserRound(roundCopy);
+        }
+    }, [userGuess]);
+
+    useEffect(() => {
+        if (userIsGuessing) {
+            setUserMessage("Round has started!");
+        } else {
+            if (solveMode === "user") {
+                setUserMessage("Guess the answer. :)");
+            }
+        }
+    }, [userIsGuessing]);
 
     const solveForAnswer = (e) => {
         let newSolveWord = inputRef.current.value.toLowerCase().trim();
@@ -62,6 +141,11 @@ const AnswerInput = () => {
             setDoesWordExist(null);
             checkIfWordExists(newSolveWord, setDoesWordExist);
         }
+    }
+
+    const makeGuess = (guessWord) => {
+        setUserIsGuessing(true);
+        getGuessResults(guessWord, correctAnswer, setUserGuess);
     }
 
     return (
