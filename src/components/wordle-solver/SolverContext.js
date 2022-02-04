@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
-import { getRandomAnswer, getEmptyRound } from './ApiCaller';
+// import { getRandomAnswer, getEmptyRound } from './ApiCaller';
+import { getRandomAnswer, getEmptyRound } from './LogicController';
 
 import { getMostCommonLetters } from './logic/solve-wordles/Counter';
 import { chooseRandomWord } from './logic/solve-wordles/WordSorter';

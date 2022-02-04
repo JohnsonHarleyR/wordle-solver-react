@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SolverContext } from '../../SolverContext';
-import { getWordleGuesses } from '../../ApiCaller';
+// import { getWordleGuesses } from '../../ApiCaller';
+import { getWordleGuesses } from '../../LogicController';
 
 const FileInput = () => {
 
