@@ -1,3 +1,31 @@
+import { countWordsWithLetterInPosition } from "./solve-wordles/Counter";
+import { WordProbability } from "./solve-wordles/classes/WordleClasses";
+
+export const getWordProbabilityScoresByUnknownLetters = (positions, words) => {
+    let scores = [];
+    words.forEach(word => {
+        let score = calculateWordProbabilityScoreByUnknownLetters(positions, word, words);
+        scores.push(new WordProbability(word, score));
+    });
+    return scores;
+}
+
+export const calculateWordProbabilityScoreByUnknownLetters = (positions, word, words) => {
+    let total = 0;
+    for (let i = 0; i < positions.length; i++) {
+        let letter = word.substring(positions[i], 1);
+        total += calculateLetterProbability(words, letter, positions[i]);
+    }
+    return total;
+}
+
+const calculateLetterProbability = (words, letter, position) => {
+    let letterCount = countWordsWithLetterInPosition(words, letter, position);
+    let totalWords = words.length;
+
+    return letterCount / totalWords;
+}
+
 export const getAccuracyPercent = (rounds) => {
     if (rounds.length === 0) {
         return `0%`;
