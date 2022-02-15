@@ -101,7 +101,6 @@ export const LText = styled.div`
 `;
 
 export const Square = styled.div`
-    border-radius: 2px;
     width: 50px;
     height: 50px;
 `;

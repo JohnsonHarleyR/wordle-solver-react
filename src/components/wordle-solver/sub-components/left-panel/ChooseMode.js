@@ -6,8 +6,8 @@ const ChooseMode = () => {
 
     const computerButton = useRef();
     const userButton = useRef();
-    const {solveMode, setSolveMode,
-        setUserMessage} = useContext(SolverContext);
+    const {solveMode, setSolveMode, rounds,
+        setUserMessage, setRoundIndex} = useContext(SolverContext);
 
     const computerMode = () => {
         setSolveMode('computer');
@@ -26,6 +26,11 @@ const ChooseMode = () => {
         } else {
             computerButton.current.disabled = false;
             userButton.current.disabled = true;
+
+            if (rounds.length !== 0) {
+                setRoundIndex(rounds.length - 1);
+                setUserMessage("Play a round yourself!");
+            }
         }
     }, [solveMode]);
 

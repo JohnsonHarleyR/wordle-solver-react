@@ -94,6 +94,13 @@ const SolverProvider = ({children}) => {
         }
     }, [userRound]);
 
+        // user playing
+        useEffect(() => {
+            if (currentRound === userRound) {
+                setUserMessage("Play a round yourself!");
+            }
+        }, [currentRound]);
+
     useEffect(() => {
         if (!userRoundFinished && solveMode === 'user') {
             // setUserRound(null);
