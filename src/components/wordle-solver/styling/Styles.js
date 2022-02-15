@@ -24,6 +24,49 @@ export const SidePanel = styled.div`
     flex-direction: column;
 `;
 
+export const ChooseModeSection = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    float: center;
+    justify-content: center;
+    text-align: center;
+`;
+
+export const Title = styled.h3`
+    padding: 0;
+    margin: 10px;
+`
+
+export const ButtonSection = styled.div`
+    display: block;
+`;
+
+export const Button = styled.button`
+    display:inline-block;
+    padding:0.7em 0em;
+    border-radius:0.15em;
+    text-decoration:none;
+    font-family:'Verdana',sans-serif;
+    font-weight: bold;
+    color:#FFFFFF;
+    text-align:center;
+    position:relative;
+    border: 1.5px solid #105410;
+    background-color: #228222;
+    :disabled {
+        background-color: #C7F3C7;
+        border: 1.5px solid #228222;
+        color: #105410;
+    }
+`;
+
+export const ModeButton = styled(Button)`
+    width: 100px;
+`;
+
+
+
 export const Stats = styled.div`
     display: flex;
     flex-direction: column;
@@ -94,9 +137,9 @@ export const GreySquare = styled.div`
 
 export const RedSquare = styled.div`
     color: white;
-    border: 2px solid #696969;
+    border: 2px solid #b8211f;
     border-radius: 3px;
-    background-color: #696969;
+    background-color: #b8211f;
     width: 50px;
     height: 50px;
 `;

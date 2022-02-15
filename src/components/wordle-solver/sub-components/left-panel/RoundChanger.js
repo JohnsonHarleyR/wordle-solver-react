@@ -63,7 +63,6 @@ const RoundChanger = () => {
 
     const determineButtonStates = () => {
         if (roundIndex !== null) {
-            let roundCount = rounds.length;
             prevButton.current.disabled = false;
             nextButton.current.disabled = false;
 

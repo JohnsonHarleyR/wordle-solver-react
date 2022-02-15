@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
+import { ChooseModeSection, ButtonSection, Title, ModeButton } from '../../styling/Styles';
 import { SolverContext } from '../../SolverContext';
 
 const ChooseMode = () => {
@@ -29,10 +30,13 @@ const ChooseMode = () => {
     }, [solveMode]);
 
     return (
-        <div>
-            <button ref={computerButton} onClick={computerMode}>Computer</button>
-            <button ref={userButton} onClick={userMode}>User</button>
-        </div>
+        <ChooseModeSection>
+            <Title>Who is guessing?</Title>
+            <ButtonSection>
+                <ModeButton ref={computerButton} onClick={computerMode}>Computer</ModeButton>
+                <ModeButton ref={userButton} onClick={userMode}>User</ModeButton>
+            </ButtonSection>
+        </ChooseModeSection>
     );
 }
 
