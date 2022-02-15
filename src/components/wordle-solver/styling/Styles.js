@@ -100,46 +100,38 @@ export const LText = styled.div`
     margin-left: -2px;
 `;
 
-export const EmptySquare = styled.div`
-    color: black;
-    border: 2px solid #C7C7C7;
+export const Square = styled.div`
     border-radius: 2px;
-    background-color: #fff;
     width: 50px;
     height: 50px;
+`;
+
+export const EmptySquare = styled(Square)`
+    border: 2px solid #C7C7C7;
+    border-radius: 3px;
+    background-color: #fff;
 `;
 
 export const GreenSquare = styled.div`
     border: 2px solid #228222;
     border-radius: 3px;
     background-color: #228222;
-    width: 50px;
-    height: 50px;
 `;
 
 export const YellowSquare = styled.div`
-    color: white;
     border: 2px solid #DAA520;
     border-radius: 3px;
     background-color: #DAA520;
-    width: 50px;
-    height: 50px;
 `;
 
 export const GreySquare = styled.div`
-    color: white;
     border: 2px solid #696969;
     border-radius: 3px;
     background-color: #696969;
-    width: 50px;
-    height: 50px;
 `;
 
 export const RedSquare = styled.div`
-    color: white;
     border: 2px solid #b8211f;
     border-radius: 3px;
     background-color: #b8211f;
-    width: 50px;
-    height: 50px;
 `;
