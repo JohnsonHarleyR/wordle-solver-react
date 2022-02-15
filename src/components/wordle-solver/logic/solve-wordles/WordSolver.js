@@ -9,7 +9,7 @@ export const getWordleSolution = (correctAnswer) => {
     let beginningTime = Date.now();
     let endResult = new WordleSolution();
     endResult.correctAnswer = correctAnswer;
-    let possibleWords = [...getGuessWords];
+    let possibleWords = getGuessWords();
 
     // figure out the most common letter in possible answers - TODO improve this part?
     for (let i = 0; i < 6; i++) {
@@ -25,7 +25,7 @@ export const getWordleSolution = (correctAnswer) => {
         }
 
         // make guess, get results
-        let newGuess = getGuessResults(newGuessWord, correctAnswer);
+        let newGuess = determineGuessResults(newGuessWord, correctAnswer);
         newGuess.guessNumber = i + 1;
         endResult.guesses.push(newGuess);
 
@@ -40,9 +40,10 @@ export const getWordleSolution = (correctAnswer) => {
         // now it will loop until it gets a correct answer
     }
     let endTime = Date.now();
+    let difference = endTime - beginningTime;
     
     endResult.timeToSolve = {
-        totalMilliseconds: (endTime.getTime() - beginningTime.getTime())
+        totalMilliseconds: difference
     };
     endResult.guessCount = endResult.guesses.length;
     endResult.isFinished = true;
@@ -101,14 +102,14 @@ export const eliminateBasedOnGuess = (possibleWords, guess) => {
     return possibleWordsFinal;
 }
 
-export const getGuessResults = (guessWord, correctWord) => {
+export const determineGuessResults = (guessWord, correctWord) => {
     let guess = new WordGuess(guessWord);
     let containedLetters = [];
 
     for (let i = 0; i < guessWord.length; i++) {
         let guessLetter = guessWord.substring(i, 1);
         let correctLetter = correctWord.substring(i, 1);
-        let results;
+        let result;
 
         if (guessLetter === correctLetter) {
             result = 'correct';
@@ -146,7 +147,7 @@ export const getGuessResults = (guessWord, correctWord) => {
                                 guessResult.status = 'incorrect';
                                 timesInContainedList--;
                                 containedLetters[containedLetterIndex].length = timesInContainedList;
-                                break;
+                                //break;
                             }
                     });
                 } while (timesInContainedList > timesInCorrectWord);
@@ -158,7 +159,6 @@ export const getGuessResults = (guessWord, correctWord) => {
 
             // TODO move this to own method
             let isInContainedList = false;
-            let timesInContainedList = 1;
             let containedLetterCount = 
             new LetterCount(guessLetter, timesInContainedList);
 

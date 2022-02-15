@@ -38,19 +38,37 @@ export const Row = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    padding: 5px;
+    padding-top: 5px;
+`;
+
+export const LText = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: "Tahoma", "Verdana", 
+    "Geneva", "Arial", sans-serif;
+    text-transform: uppercase;
+    font-size: 27px;
+    color: white;
+    width: 52px;
+    height: 52px;
+    margin-top: -2px;
+    margin-left: -2px;
 `;
 
 export const EmptySquare = styled.div`
-    border: 2px solid grey;
     color: black;
+    border: 2px solid #C7C7C7;
+    border-radius: 2px;
     background-color: #fff;
     width: 50px;
     height: 50px;
 `;
 
 export const GreenSquare = styled.div`
-    color: white;
+    border: 2px solid #228222;
+    border-radius: 3px;
     background-color: #228222;
     width: 50px;
     height: 50px;
@@ -58,6 +76,8 @@ export const GreenSquare = styled.div`
 
 export const YellowSquare = styled.div`
     color: white;
+    border: 2px solid #DAA520;
+    border-radius: 3px;
     background-color: #DAA520;
     width: 50px;
     height: 50px;
@@ -65,6 +85,8 @@ export const YellowSquare = styled.div`
 
 export const GreySquare = styled.div`
     color: white;
+    border: 2px solid #696969;
+    border-radius: 3px;
     background-color: #696969;
     width: 50px;
     height: 50px;
@@ -72,11 +94,9 @@ export const GreySquare = styled.div`
 
 export const RedSquare = styled.div`
     color: white;
-    background-color: #B22222;
+    border: 2px solid #696969;
+    border-radius: 3px;
+    background-color: #696969;
     width: 50px;
     height: 50px;
-`;
-
-export const LText = styled.div`
-    text-transform: uppercase;
 `;

@@ -1,8 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
-// import { getRandomAnswer, getEmptyRound } from './ApiCaller';
-import { getRandomAnswer, getEmptyRound } from './LogicController';
-
-import { getMostCommonLetters } from './logic/solve-wordles/Counter';
+import { getRandomAnswer, getEmptyRound } from './ApiCaller';
+//import { getRandomAnswer, getEmptyRound } from './LogicController';
 import { chooseRandomWord } from './logic/solve-wordles/WordSorter';
 
 const SolverContext = createContext({rounds:[]});
@@ -21,11 +19,6 @@ const SolverProvider = ({children}) => {
     const [userIsGuessing, setUserIsGuessing] = useState(false);
     const [userMessage, setUserMessage] = useState("");
     const [userRoundFinished, setUserRoundFinished] = useState(false);
-
-    // test
-    // useEffect(() => {
-    //     testLetterCount();
-    // }, []);
 
     const resetRounds = () => {
         setUserRound(null);
@@ -147,19 +140,6 @@ export const getEmptyGuess = (guessNum) => {
         }
     );
 }
-
-
-// tests
-
-function testLetterCount() {
-  let words = ['tests', 'bests', 'trumpet', 'love'];
-  let letters = ['e', 's'];
-  console.log(chooseRandomWord(words));
-}
-
-
-
-
 
 export {SolverContext};
 export default SolverProvider;

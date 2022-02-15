@@ -1,6 +1,6 @@
-import { getWordleSolution, doesWordExist, getGuessResults } 
+import { getWordleSolution, doesWordExist, determineGuessResults } 
 from "./logic/solve-wordles/WordSolver";
-import { getAnswerWords } from "./word-banks/AnswerWords";
+import { getAnswerWords } from "./logic/solve-wordles/word-banks/AnswerWords";
 import { WordleSolution } from "./logic/solve-wordles/classes/WordleClasses";
 
 export const getWordleGuesses = (correctAnswer, setFunction) => {
@@ -32,6 +32,6 @@ export const getEmptyRound = (correctAnswer, setFunction) => {
 
 export const getGuessResults = (guessWord, correctWord, setFunction) => {
     console.log('guessing word');
-    let results = getGuessResults(guessWord, correctWord);
+    let results = determineGuessResults(guessWord, correctWord);
     setFunction(results);
 }

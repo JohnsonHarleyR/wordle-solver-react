@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { SolverContext } from '../../SolverContext';
-// import { getRandomAnswer } from '../../ApiCaller';
-import { getRandomAnswer } from '../../LogicController';
+import { getRandomAnswer } from '../../ApiCaller';
+//import { getRandomAnswer } from '../../LogicController';
 
 const UserMessage = () => {
 

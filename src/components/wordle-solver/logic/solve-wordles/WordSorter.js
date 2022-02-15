@@ -101,7 +101,7 @@ export const getProbablyWordFromUnknownLetters = (pattern, words) => {
     }
 
     let scores = getWordProbabilityScoresByUnknownLetters(unknownPositions, words);
-    scores.sort(function(a,b) {b.score - a.score});
+    scores.sort((a,b) => b.score - a.score);
 
     return scores[0].word;
 }

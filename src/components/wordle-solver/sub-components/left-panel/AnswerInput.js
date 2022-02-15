@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { getEmptyGuesses, SolverContext } from '../../SolverContext';
-// import { getWordleGuesses, checkIfWordExists,
-//      getGuessResults, getRandomAnswer } from '../../ApiCaller';
 import { getWordleGuesses, checkIfWordExists,
-    getGuessResults, getRandomAnswer } from '../../LogicController';
+     getGuessResults, getRandomAnswer } from '../../ApiCaller';
+//import { getWordleGuesses, checkIfWordExists,
+//    getGuessResults, getRandomAnswer } from '../../LogicController';
 
 const AnswerInput = () => {
 
