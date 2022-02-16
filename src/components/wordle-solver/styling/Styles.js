@@ -33,6 +33,15 @@ export const ChooseModeSection = styled.div`
     text-align: center;
 `;
 
+export const Section = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    float: center;
+    justify-content: center;
+    text-align: center;
+`;
+
 export const Title = styled.h3`
     padding: 0;
     margin: 10px;
@@ -65,7 +74,16 @@ export const ModeButton = styled(Button)`
     width: 100px;
 `;
 
+export const GuessButton = styled(Button)`
+    width: 200px;
+`;
 
+export const Input = styled.input`
+    width: 190px;
+    height: 30px;
+    border-radius: 3px;
+    margin: 5px;
+`;
 
 export const Stats = styled.div`
     display: flex;

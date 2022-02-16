@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { getEmptyGuesses, SolverContext } from '../../SolverContext';
 import { getWordleGuesses, checkIfWordExists,
      getGuessResults, getRandomAnswer } from '../../ApiCaller';
+import { GuessButton, Input, Section, ButtonSection } from '../../styling/Styles';
 //import { getWordleGuesses, checkIfWordExists,
 //    getGuessResults, getRandomAnswer } from '../../LogicController';
 
@@ -55,7 +56,7 @@ const AnswerInput = () => {
         if (solveMode === 'computer') {
             setButtonText('Solve');
             setUserGuess(null);
-            inputRef.current.placeholder="Enter word for the computer to guess";
+            inputRef.current.placeholder="Enter answer for computer";
         } else {
             setSolveWord(null);
             setButtonText('Guess');
@@ -153,11 +154,14 @@ const AnswerInput = () => {
     }
 
     return (
-        <>
-            <input type="text" ref={inputRef} placeholder="Enter a word for the computer to guess"/>
-            <button onClick={solveForAnswer}>{buttonText}</button>
+        <Section>
+            <ButtonSection>
+                <Input type="text" ref={inputRef} placeholder="Enter answer for computer"/>
+                <GuessButton onClick={solveForAnswer}>{buttonText}</GuessButton>
+            </ButtonSection>
             <p>{errorMessage}</p>
-        </>
+            
+        </Section>
     );
 }
 
