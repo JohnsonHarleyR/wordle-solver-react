@@ -141,5 +141,5 @@ export const getTotalTimeWithPenalty = (rounds) => {
     let penaltyPercent = totalIncorrect * .01;
     let penalty = totalTime * penaltyPercent;
     let newTotal = ((totalTime + penalty) / 1000).toFixed(3);
-    return `${newTotal} seconds`;
+    return `${newTotal} s`;
 }

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { SolverContext, getEmptyGuesses, getEmptyGuess } from '../../SolverContext';
-import { Solution } from '../../styling/Styles';
+import { Solution, Section, GameTitle } from '../../styling/Styles';
 import GuessRow from './GuessRow';
 import UserMessage from './UserMessage';
 import GuessChanger from './GuessChanger';
@@ -32,6 +32,10 @@ const SolutionDisplay = () => {
 
     return (
         <Solution>
+            <Section>
+            <GameTitle>Wordle Solver</GameTitle>
+            </Section>
+            
             {rows}
             <UserMessage />
             <GuessChanger />

@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { getEmptyGuesses, SolverContext } from '../../SolverContext';
 import { getWordleGuesses, checkIfWordExists,
      getGuessResults, getRandomAnswer } from '../../ApiCaller';
-import { GuessButton, Input, Section, ButtonSection } from '../../styling/Styles';
+import { GuessButton, Input, Section, AnswerTitle,
+    ButtonSection, AnswerSection, Message } from '../../styling/Styles';
 //import { getWordleGuesses, checkIfWordExists,
 //    getGuessResults, getRandomAnswer } from '../../LogicController';
 
@@ -154,14 +155,14 @@ const AnswerInput = () => {
     }
 
     return (
-        <Section>
+        <AnswerSection>
+            <AnswerTitle>Answer</AnswerTitle>
             <ButtonSection>
                 <Input type="text" ref={inputRef} placeholder="Enter answer for computer"/>
                 <GuessButton onClick={solveForAnswer}>{buttonText}</GuessButton>
             </ButtonSection>
-            <p>{errorMessage}</p>
-            
-        </Section>
+            <Message>{errorMessage}</Message>
+        </AnswerSection>
     );
 }
 

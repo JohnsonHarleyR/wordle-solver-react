@@ -10,15 +10,17 @@ export const Top = styled.div`
     border: 1px solid cyan;
     display: flex;
     width: 100%;
+    justify-content: center;
 `;
 
 export const Lower = styled.div`
     border: 1px solid cyan;
     display: flex;
+    justify-content: center;
 `;
 
 export const SidePanel = styled.div`
-    width: 300px;
+    width: 250px;
     border: 1px solid cyan;
     display: flex;
     flex-direction: column;
@@ -31,6 +33,8 @@ export const ChooseModeSection = styled.div`
     float: center;
     justify-content: center;
     text-align: center;
+    margin-top: 0px;
+    margin-bottom: 15px;
 `;
 
 export const Section = styled.div`
@@ -42,10 +46,41 @@ export const Section = styled.div`
     text-align: center;
 `;
 
+export const AnswerSection = styled(Section)`
+    margin-top: 27px;
+`;
+
+
+export const Message = styled.div`
+    height: 30px;
+    width: 200px;
+    color: red;
+    align-self: center;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+    margin-top: 1px;
+`;
+
 export const Title = styled.h3`
     padding: 0;
-    margin: 10px;
+    margin-top: 3px;
+    margin-bottom: 8px;
 `
+
+export const RoundTitle = styled(Title)`
+    margin-top: 10px;
+    margin-bottom: 5px;
+`;
+
+export const AnswerTitle = styled(Title)`
+    margin: 0;
+`;
+
+export const GameTitle = styled.h2`
+    padding: 0;
+    margin: 10px;
+`;
 
 export const ButtonSection = styled.div`
     display: block;
@@ -78,6 +113,14 @@ export const GuessButton = styled(Button)`
     width: 200px;
 `;
 
+export const NavButton = styled(Button)`
+    width: 100px;
+`;
+
+export const ResetButton = styled(Button)`
+    width: 200px;
+`;
+
 export const Input = styled.input`
     width: 190px;
     height: 30px;
@@ -91,7 +134,8 @@ export const Stats = styled.div`
 `;
 
 export const Solution = styled.div`
-    width: 300px;
+    padding-left: 10px;
+    padding-right: 10px;
     border: 1px solid cyan;
 `;
 
@@ -99,7 +143,7 @@ export const Row = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    padding-top: 5px;
+
 `;
 
 export const LText = styled.div`
@@ -121,6 +165,7 @@ export const LText = styled.div`
 export const Square = styled.div`
     width: 50px;
     height: 50px;
+    margin: 3px;
 `;
 
 export const EmptySquare = styled(Square)`
@@ -129,25 +174,25 @@ export const EmptySquare = styled(Square)`
     background-color: #fff;
 `;
 
-export const GreenSquare = styled.div`
+export const GreenSquare = styled(Square)`
     border: 2px solid #228222;
     border-radius: 3px;
     background-color: #228222;
 `;
 
-export const YellowSquare = styled.div`
+export const YellowSquare = styled(Square)`
     border: 2px solid #DAA520;
     border-radius: 3px;
     background-color: #DAA520;
 `;
 
-export const GreySquare = styled.div`
+export const GreySquare = styled(Square)`
     border: 2px solid #696969;
     border-radius: 3px;
     background-color: #696969;
 `;
 
-export const RedSquare = styled.div`
+export const RedSquare = styled(Square)`
     border: 2px solid #b8211f;
     border-radius: 3px;
     background-color: #b8211f;

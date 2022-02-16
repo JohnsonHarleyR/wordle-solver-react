@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { SolverContext } from '../../SolverContext';
+import { Section, ButtonSection, NavButton, 
+    ResetButton, RoundTitle } from '../../styling/Styles';
 
 const RoundChanger = () => {
 
@@ -143,13 +145,15 @@ const RoundChanger = () => {
     },[userIsGuessing, currentRound]);
 
     return (
-        <div>
-            <button ref={prevButton} onClick={prevRound}>Prev</button>
-            <span>Round {getRoundNumber()}</span>
-            <button ref={nextButton} onClick={nextRound}>Next</button>
-            <br></br>
-            <button onClick={resetRounds}>Reset Rounds</button>
-        </div>
+        <Section>
+            <RoundTitle>Round: {getRoundNumber()}</RoundTitle>
+            <ButtonSection>
+                <NavButton ref={prevButton} onClick={prevRound}>Prev</NavButton>
+                <NavButton ref={nextButton} onClick={nextRound}>Next</NavButton>
+                <br></br>
+                <ResetButton onClick={resetRounds}>Reset Rounds</ResetButton>
+            </ButtonSection>
+        </Section>
     );
 }
 
