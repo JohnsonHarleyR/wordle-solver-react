@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { SolverContext } from '../../SolverContext';
+import { Section } from '../../styling/Styles';
 import { getRandomAnswer } from '../../ApiCaller';
-//import { getRandomAnswer } from '../../LogicController';
 
 const UserMessage = () => {
 
@@ -21,10 +21,6 @@ const UserMessage = () => {
             newUserRoundButton.current.style.display = "block";
         }
     }, [userRoundFinished, solveMode]);
-
-    const startNewRound = () => {
-        startNewUserRound();
-    }
 
     return (
         <div>
