@@ -8,15 +8,14 @@ import GuessChanger from './GuessChanger';
 const SolutionDisplay = () => {
 
 
-    const {currentRound, guesses, 
-        setGuesses, userMessage} = useContext(SolverContext);
+    const {currentRound, guesses, solveMode, rounds,
+        setGuesses} = useContext(SolverContext);
     const [rows, setRows] = useState(getRows(currentRound, guesses));
 
     useEffect(() => {
         if (currentRound === null)
         {
             setGuesses(getEmptyGuesses());
-            console.log('round null');
         } else {
             if (currentRound !== undefined) {
                 setGuesses(currentRound.guesses);
@@ -24,6 +23,14 @@ const SolutionDisplay = () => {
             }
         }
     }, [currentRound]);
+
+    useEffect(() => {
+        if (solveMode === "computer" && 
+            rounds !== null && rounds !== undefined &&
+            rounds.length === 0) {
+            setGuesses(getEmptyGuesses());
+        }
+    }, [solveMode]);
 
     useEffect(() => {
         let newRows = getRows(currentRound, guesses);

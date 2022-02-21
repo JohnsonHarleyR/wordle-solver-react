@@ -2,5 +2,6 @@ export const ListType = {
     Suggested: 1,
     Full: 2,
     Wordle: 3,
-    WordleCommon: 4
+    WordleCommon: 4,
+    Scrabble: 5
 }

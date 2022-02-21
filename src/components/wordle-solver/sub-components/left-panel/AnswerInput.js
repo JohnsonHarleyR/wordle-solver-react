@@ -3,7 +3,7 @@ import { getEmptyGuesses, SolverContext } from '../../SolverContext';
 import { getWordleGuesses, checkIfWordExists,
      getGuessResults, getRandomAnswer } from '../../ApiCaller';
 import { GuessButton, Input, Section, AnswerTitle,
-    ButtonSection, AnswerSection, Message } from '../../styling/Styles';
+    ButtonSection, TopSection, Message } from '../../styling/Styles';
 //import { getWordleGuesses, checkIfWordExists,
 //    getGuessResults, getRandomAnswer } from '../../LogicController';
 
@@ -11,11 +11,12 @@ const AnswerInput = () => {
 
     let inputRef = useRef();
 
-    const {addedRound, setAddedRound, solveMode, setRoundIndex,
-    userRound, setUserRound, correctAnswer, rounds, setRounds,
+    const {addedRound, setAddedRound, solveMode,
+    userRound, setUserRound, correctAnswer,
     guesses, setGuesses, setUserIsGuessing, setUserMessage,
-    setCorrectAnswer, userIsGuessing, setUserRoundFinished
-    } = useContext(SolverContext);
+    userIsGuessing, setUserRoundFinished,
+    userRoundFinished, setStartTime, startTime, 
+    checkWordleCommon} = useContext(SolverContext);
 
     const [errorMessage, setErrorMessage] = useState("");
     const [solveWord, setSolveWord] = useState(null);
@@ -31,13 +32,21 @@ const AnswerInput = () => {
             if (solveWord === null) {
                 setErrorMessage("");
             } else if (!doesWordExist) {
-                setErrorMessage("Not a valid word. Please choose another.");
+                if (checkWordleCommon) {
+                    setErrorMessage('Word is not common. Uncheck "words are common" to use all.');
+                } else {
+                    setErrorMessage("Not a valid word. Please choose another.");
+                }
+                
             } else {
                 setErrorMessage("");
                 if (solveMode === 'computer') {
-                    getWordleGuesses(solveWord, setAddedRound);
+                    getWordleGuesses(solveWord, setAddedRound, 
+                        checkWordleCommon);
+                    inputRef.current.value = "";
                 } else {
                     makeGuess(solveWord);
+                    inputRef.current.value = "";
                 }
             }
         }
@@ -45,6 +54,7 @@ const AnswerInput = () => {
     }, [doesWordExist]);
 
     useEffect(() => {
+        setSolveWord(null);
         if (addedRound === null) {
             setSolveWord(null);
             setErrorMessage("");
@@ -57,8 +67,10 @@ const AnswerInput = () => {
         if (solveMode === 'computer') {
             setButtonText('Solve');
             setUserGuess(null);
+            setSolveWord(null);
             inputRef.current.placeholder="Enter answer for computer";
         } else {
+            setUserGuess(null);
             setSolveWord(null);
             setButtonText('Guess');
             inputRef.current.value = "";
@@ -84,45 +96,40 @@ const AnswerInput = () => {
                 roundCopy.didWin = true;
             }
 
+            setUserRound(roundCopy);
+
             // once the user is done with a round
             if (roundCopy.didWin || roundCopy.guesses.length >= 6) {
                 roundCopy.isFinished = true;
+                console.log('round finished');
+                let nowTime = Date.now();
+                let mSeconds = (nowTime - startTime);
+                roundCopy.timeToSolve.totalMilliseconds = mSeconds;
+                setUserRound(roundCopy);
                 setUserRoundFinished(true);
-
-                let newMessage = "Round complete. ";
-                if (roundCopy.didWin) {
-                    newMessage += "You win!";
-                } else {
-                    newMessage += `You are out of guesses. The answer was ${roundCopy.correctAnswer}`;
-                }
-                setUserMessage(newMessage);
-
-                // add it to rounds, set the index to the new round
-                // setAddedRound(roundCopy);
-
-                // let roundsCopy = [...rounds];
-                // roundsCopy.push(roundCopy);
-                // setRounds(roundsCopy);
-                // setGuesses(roundCopy.guesses);
-                // setRoundIndex(roundsCopy.length - 1);
-
-                //make the user round null, as well as answer, 
-                //and set isguessing to false
-
-                // setUserRound(null);
-                // setUserIsGuessing(false);
-                // // get a new word if they want to start again
-                // setCorrectAnswer(getRandomAnswer(setCorrectAnswer));
-                
             }
-
-            setUserRound(roundCopy);
         }
     }, [userGuess]);
 
     useEffect(() => {
+        if (userRound) {
+            let newMessage = "Round complete. ";
+            if (userRound != null && userRound.didWin) {
+                newMessage += "You win!";
+            } else {
+                newMessage += `You are out of guesses. The answer was ${userRound.correctAnswer}`;
+            }
+            setUserMessage(newMessage);
+        }
+
+    }, [userRoundFinished]);
+
+    useEffect(() => {
         if (userIsGuessing) {
             setUserMessage("Round has started!");
+            if (startTime === null) {
+                setStartTime(Date.now);
+            }
         } else {
             if (solveMode === "user") {
                 setUserMessage("Guess the answer. :)");
@@ -145,7 +152,9 @@ const AnswerInput = () => {
         } else {
             setSolveWord(newSolveWord);
             setDoesWordExist(null);
-            checkIfWordExists(newSolveWord, setDoesWordExist);
+            let userGuessing = solveMode === 'computer' ? false: true;
+            checkIfWordExists(newSolveWord, setDoesWordExist, 
+                checkWordleCommon, userGuessing);
         }
     }
 
@@ -155,14 +164,14 @@ const AnswerInput = () => {
     }
 
     return (
-        <AnswerSection>
+        <TopSection>
             <AnswerTitle>Answer</AnswerTitle>
             <ButtonSection>
                 <Input type="text" ref={inputRef} placeholder="Enter answer for computer"/>
                 <GuessButton onClick={solveForAnswer}>{buttonText}</GuessButton>
             </ButtonSection>
             <Message>{errorMessage}</Message>
-        </AnswerSection>
+        </TopSection>
     );
 }
 

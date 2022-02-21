@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Section, ImportMessage, DownloadLink } from '../../styling/Styles';
 import { SolverContext } from '../../SolverContext';
 
 const FileOutput = () => {
 
-    const {rounds} = useContext(SolverContext);
+    const {rounds, uploadMessage, guessIndex,
+        setUploadMessage, roundIndex} = useContext(SolverContext);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        setMessage("");
-    }, [rounds]);
+        setUploadMessage("");
+    }, [rounds, guessIndex, roundIndex]);
 
     const createOutputText = () => {
         let output = "";
@@ -30,12 +32,13 @@ const FileOutput = () => {
         let text = createOutputText();
         e.target.href = `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`;
         e.target.download = "solver-output.txt";
-        setMessage('(check downloads folder...)')
+        setUploadMessage('(check downloads folder...)')
     }
 
     return(
         <>
-        <a href="" onClick={download}>Download Output...</a><span> {message}</span>
+        <DownloadLink href="" onClick={download}>Download Output</DownloadLink>
+        <ImportMessage>{uploadMessage}</ImportMessage>
         </>
     );
 }

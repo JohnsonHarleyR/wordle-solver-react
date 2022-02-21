@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { SolverContext } from '../../SolverContext';
-import {Stats} from '../../styling/Styles';
+import {Stats, StatTitle, PenaltyTitle, 
+    StatWrapper} from '../../styling/Styles';
 import { getAccuracyPercent, getAverageGuessesToSolve, 
 getAverageTimeToSolve, getFailedWords, getTotalTime,
 getAverageGuessesToSolveWithPenalty, 
@@ -34,16 +35,20 @@ const Statistics = () => {
 
     return(
         <Stats>
-            <h4>Statistics</h4>
-            <span>Rounds: {numberOfRounds}</span>
-            <span>Percent correct: {correctAnswerRate}</span>
-            <span>Average guesses to win: {averageGuesses}</span>
-            <span>Average time: {averageTime}</span>
-            <span>Failed words: {failedWords}</span>
-            <span>Total time: {totalTime}</span>
-            <br></br>
-            <span>Average guesses with penalty: {averageGuessesWithPenalty}</span>
-            <span>Total time with penalty: {totalTimeWithPenalty}</span>
+            <StatTitle>Statistics</StatTitle>
+            <StatWrapper>
+            <span>Rounds: {numberOfRounds}</span><br></br>
+            <span>Percent correct: {correctAnswerRate}</span><br></br>
+            <span>Average guesses to win: {averageGuesses}</span><br></br>
+            <span>Average time: {averageTime}</span><br></br>
+            <span>Failed words: {failedWords}</span><br></br>
+            <span>Total time: {totalTime}</span><br></br>
+
+            <PenaltyTitle>With Contest Penalties</PenaltyTitle>
+            <span>Average guesses: {averageGuessesWithPenalty}</span><br></br>
+            <span>Total time: {totalTimeWithPenalty}</span>
+            </StatWrapper>
+
         </Stats>
     );
 }

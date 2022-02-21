@@ -1,15 +1,27 @@
 const portNumber = "44320";
 const startUrl = `https://localhost:${portNumber}`;
 
-export const getWordleGuesses = (correctAnswer, setFunction) => {
+export const getWordleGuesses = (correctAnswer, setFunction, isForContest) => {
     //console.log('getting guesses');
-    FetchData(`${startUrl}/Wordle/GetWordleGuesses?correctAnswer=${correctAnswer}`, 
+    if (isForContest === undefined)
+    {
+        isForContest = false;
+    }
+    FetchData(`${startUrl}/Wordle/GetWordleGuesses?correctAnswer=${correctAnswer}&isForContest=${isForContest}`, 
     setFunction, "Could not retrieve guesses.");
 }
 
-export const checkIfWordExists = (word, setFunction) => {
+export const checkIfWordExists = (word, setFunction, isForContest, userIsGuessing) => {
     //console.log('checking if word exists');
-    FetchData(`${startUrl}/Wordle/DoesWordExist?word=${word}`, 
+    if (isForContest === undefined)
+    {
+        isForContest = false;
+    }
+    if (userIsGuessing === undefined)
+    {
+        userIsGuessing = true;
+    }
+    FetchData(`${startUrl}/Wordle/DoesWordExist?word=${word}&isForContest=${isForContest}&userIsGuessing=${userIsGuessing}`, 
     setFunction, "Could not retrieve guesses.");
 }
 

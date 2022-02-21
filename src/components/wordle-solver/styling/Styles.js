@@ -46,8 +46,29 @@ export const Section = styled.div`
     text-align: center;
 `;
 
-export const AnswerSection = styled(Section)`
-    margin-top: 27px;
+export const CheckSection = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    float: center;
+    margin-top: 0;
+    align-items: center;
+    margin-bottom: 5px;
+`;
+
+export const CheckWords = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    float: center;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+`;
+
+export const TopSection = styled(Section)`
+    margin-top: 26px;
 `;
 
 
@@ -62,14 +83,29 @@ export const Message = styled.div`
     margin-top: 1px;
 `;
 
+export const ImportMessage = styled(Message)`
+    color: #DAA520;
+    margin-top: 0;
+    height: 15px;
+`;
+
+export const DownloadLink = styled.a`
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    margin-top: 5px;
+`;
+
 export const Title = styled.h3`
     padding: 0;
     margin-top: 3px;
     margin-bottom: 8px;
 `
+export const ImportTitle = styled(Title)`
+    margin-bottom: 5px;
+`;
 
 export const RoundTitle = styled(Title)`
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 5px;
 `;
 
@@ -121,6 +157,12 @@ export const ResetButton = styled(Button)`
     width: 200px;
 `;
 
+export const SelectButton = styled(Button)`
+    width: 180px;
+    margin-top: 2px;
+    background-color: #696969;
+`;
+
 export const Input = styled.input`
     width: 190px;
     height: 30px;
@@ -128,15 +170,40 @@ export const Input = styled.input`
     margin: 5px;
 `;
 
-export const Stats = styled.div`
-    display: flex;
-    flex-direction: column;
+export const Check = styled.input`
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+`;
+
+export const Stats = styled(Section)`
+    justify-content: center;
+    text-align: left;
+`;
+
+export const StatTitle = styled(Title)`
+    padding-top: 5px;
+    align-self: center;
+`;
+
+export const PenaltyTitle = styled(Title)`
+    font-size: smaller;
+    margin-bottom: 0;
+    margin-top: 15px;
+`;
+
+export const StatWrapper = styled.div`
+    margin-left: 20px;
+    margin-right: 20px;
+    display: inline-block;
+    text-align: left;
 `;
 
 export const Solution = styled.div`
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid cyan;
+    max-width: 300px;
 `;
 
 export const Row = styled.div`

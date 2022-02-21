@@ -6,8 +6,8 @@ import Statistics from './Statistics';
 const RightPanel = () => {
     return (
         <SidePanel>
-            <Statistics />
             <FileHandler />
+            <Statistics />
         </SidePanel>
     );
 }

@@ -70,7 +70,7 @@ export const getAverageTimeToSolve = (rounds) => {
     });
 
     let average = ((totalTime / totalRounds) / 1000).toFixed(3);
-    return `${average} seconds`;
+    return getTimeString(average);
 }
 
 export const getFailedWords = (rounds) => {
@@ -79,14 +79,20 @@ export const getFailedWords = (rounds) => {
     }
 
     let failedWords = "";
+    let wordCount = 0;
     rounds.forEach(round => {
         if (!round.didWin) {
             if (failedWords != "") {
                 failedWords += ", ";
+                wordCount++;
             }
             failedWords += round.correctAnswer;
         }
     });
+
+    if (wordCount === 0) {
+        failedWords = "none";
+    }
 
     return failedWords;
 }
@@ -102,7 +108,7 @@ export const getTotalTime = (rounds) => {
     });
 
     let newTotal = (totalTime / 1000).toFixed(3);
-    return `${newTotal} seconds`;
+    return getTimeString(newTotal);
 }
 
 export const getAverageGuessesToSolveWithPenalty = (rounds) => {
@@ -141,5 +147,22 @@ export const getTotalTimeWithPenalty = (rounds) => {
     let penaltyPercent = totalIncorrect * .01;
     let penalty = totalTime * penaltyPercent;
     let newTotal = ((totalTime + penalty) / 1000).toFixed(3);
-    return `${newTotal} s`;
+    return getTimeString(newTotal);
+}
+
+const canBeMinutes = (totalSeconds) => {
+    if (totalSeconds >= 60) {
+        return true;
+    }
+    return false;
+}
+
+const getTimeString = (totalSeconds) => {
+    if (!canBeMinutes) {
+        return `${totalSeconds} s`;
+    } else {
+        let totalMinutes = (totalSeconds / 60).toFixed(0);
+        let seconds = (totalSeconds % 60).toFixed(3);
+        return `${totalMinutes}:${seconds} m`;
+    }
 }

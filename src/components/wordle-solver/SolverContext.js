@@ -1,7 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
 import { getRandomAnswer, getEmptyRound } from './ApiCaller';
-//import { getRandomAnswer, getEmptyRound } from './LogicController';
-import { chooseRandomWord } from './logic/solve-wordles/WordSorter';
 
 const SolverContext = createContext({rounds:[]});
 
@@ -19,6 +17,10 @@ const SolverProvider = ({children}) => {
     const [userIsGuessing, setUserIsGuessing] = useState(false);
     const [userMessage, setUserMessage] = useState("");
     const [userRoundFinished, setUserRoundFinished] = useState(false);
+    const [uploadMessage, setUploadMessage] = useState("");
+
+    const [startTime, setStartTime] = useState(null);
+    const [checkWordleCommon, setCheckWordleCommon] = useState(false);
 
     const resetRounds = () => {
         setUserRound(null);
@@ -50,6 +52,8 @@ const SolverProvider = ({children}) => {
             setRounds(roundsCopy);
             setRoundIndex(newIndex);
             console.log(rounds);
+
+            setStartTime(null);
         }
     }, [addedRound]);
 
@@ -73,10 +77,10 @@ const SolverProvider = ({children}) => {
             if (roundIndex !== null) {
                 setCurrentRound(rounds[roundIndex]);
             }
-            setUserMessage("Enter a word for the computer to guess.");
+            //setUserMessage("Enter a word for the computer to guess.");
         } else {
             getRandomAnswer(setCorrectAnswer);
-            setUserMessage("Play a round yourself!");
+
         }
     }, [solveMode]);
 
@@ -97,7 +101,7 @@ const SolverProvider = ({children}) => {
         // user playing
         useEffect(() => {
             if (currentRound === userRound) {
-                setUserMessage("Play a round yourself!");
+                //setUserMessage("Play a round yourself!");
             }
         }, [currentRound]);
 
@@ -116,11 +120,13 @@ const SolverProvider = ({children}) => {
         <SolverContext.Provider value={{solveMode, addedRound, 
             currentRound, guesses, rounds, roundIndex, userRound,
             userIsGuessing, correctAnswer, userMessage,
-            userRoundFinished, guessIndex,
+            userRoundFinished, guessIndex, uploadMessage,
+            checkWordleCommon, startTime,
         setSolveMode, setAddedRound, setCurrentRound, setGuesses, 
         setRounds, setRoundIndex, resetRounds, setUserRound,
         setUserIsGuessing, setCorrectAnswer, setUserMessage,
-        setUserRoundFinished, startNewUserRound, setGuessIndex}}>
+        setUserRoundFinished, startNewUserRound, setGuessIndex, 
+        setUploadMessage, setCheckWordleCommon, setStartTime}}>
             {children}
         </SolverContext.Provider>
     )

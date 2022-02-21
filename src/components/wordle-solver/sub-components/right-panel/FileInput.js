@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SolverContext } from '../../SolverContext';
+import { ImportTitle, Section, ButtonSection, 
+    SelectButton, Check } from '../../styling/Styles';
 import { getWordleGuesses } from '../../ApiCaller';
+
+import CheckCommon from './CheckCommon';
 //import { getWordleGuesses } from '../../LogicController';
 
 const FileInput = () => {
 
     const input = useRef();
-    const {setAddedRound, resetRounds} = useContext(SolverContext);
+    const {setAddedRound, resetRounds, uploadMessage,
+        setUploadMessage, checkWordleCommon} = useContext(SolverContext);
     const [fileContent, setFileContent] = useState(null);
-    const [message, setMessage] = useState("");
 
     let tempArray = [];
     let tempIndex = null;
@@ -17,7 +21,7 @@ const FileInput = () => {
 
     const readFile = (e) => {
         try {
-            setMessage("Reading file...");
+            setUploadMessage("Reading file...");
             let fileReader = new FileReader();
             fileReader.onload = () => {
                 setFileContent(fileReader.result);
@@ -25,7 +29,7 @@ const FileInput = () => {
             fileReader.readAsText(e.target.files[0]);
 
         } catch (error) {
-            setMessage("Error: Could not read file.");
+            setUploadMessage("Error: Could not read file.");
         }
     }
 
@@ -42,28 +46,34 @@ const FileInput = () => {
                 tempIndex = tempIndexCopy;
         
                 if (tempIndexCopy < tempArray.length) {
-                    getWordleGuesses(tempArray[tempIndexCopy], setTemp);
+                    getWordleGuesses(tempArray[tempIndexCopy], 
+                        setTemp, checkWordleCommon);
                 } else {
                     tempRoundsCopy.forEach(round => {
                         setAddedRound(round);
                     })
-                    setMessage("");
+                    setUploadMessage("");
                     tempArray = [];
                     tempIndex = null;
                     tempRounds = [];
                 }
     
             } catch (error) {
-                setMessage("Error: The text format is invalid.");
+                setUploadMessage("Error: The text format is invalid.");
             }
         }
 
     }
 
+    const eraseContent = () => {
+        input.current.value = "";
+        setFileContent(null);
+    }
+
     useEffect(() => {
         if (fileContent != null) {
             try {
-                setMessage("Parsing file...");
+                setUploadMessage("Parsing file...");
     
                 let answerArray = fileContent.split("\n");
                 if (answerArray.length != 0) {
@@ -72,21 +82,34 @@ const FileInput = () => {
                     //setTempArray(answerArray);
                     tempIndex = 0;
                     //setTempIndex(0);
-                    getWordleGuesses(answerArray[0], setTemp);
+                    getWordleGuesses(answerArray[0], setTemp, 
+                        checkWordleCommon);
                 } else {
-                    setMessage("No input in files...");
+                    setUploadMessage("No input in files...");
                 }
     
             } catch (error) {
-                setMessage("Error: The text format is invalid.");
+                setUploadMessage("Error: The text format is invalid.");
             }
         }
     }, [fileContent]);
 
+    const loadFile = () => {
+        eraseContent();
+        input.current.click();
+    }
+
     return(
-        <>
-        Rounds from file: <input type="file" ref={input} onChange={readFile}/><span>{message}</span>
-        </>
+        <Section>
+            <ImportTitle>
+                Import Answers
+            </ImportTitle>
+            <CheckCommon/>
+            <ButtonSection>
+                <SelectButton onClick={loadFile}>Select Text File</SelectButton>
+                <input type="file" id="fileInput" style={{display: "none"}} ref={input} onChange={readFile}/>
+            </ButtonSection>
+        </Section>
     );
 }
 
