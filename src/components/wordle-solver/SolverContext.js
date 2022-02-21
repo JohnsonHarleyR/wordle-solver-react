@@ -26,6 +26,7 @@ const SolverProvider = ({children}) => {
         setUserRound(null);
         setCorrectAnswer(null);
         setUserIsGuessing(false);
+        setUserRoundFinished(false);
         setSolveMode('computer');
         setAddedRound(null);
         setCurrentRound(null);
@@ -56,6 +57,10 @@ const SolverProvider = ({children}) => {
             setStartTime(null);
         }
     }, [addedRound]);
+
+    // useEffect(() => {
+    //     setUserMessage("The round has started.");
+    // }, [userIsGuessing]);
 
     useEffect(() => {
         if (roundIndex !== null) {
@@ -101,7 +106,18 @@ const SolverProvider = ({children}) => {
         // user playing
         useEffect(() => {
             if (currentRound === userRound) {
-                setUserMessage("Play a round yourself!");
+                if (solveMode === "user" && currentRound !== null) {
+                    if (guesses != null && guesses.length > 0 && guesses[0].word !== null && 
+                        userIsGuessing) {
+                            if (!userRoundFinished) {
+                                setUserMessage("The round has started.");
+                            }
+
+                    } else {
+                        setUserMessage("Your turn! Once you guess, the round will begin.");
+                    }
+                }
+                
             } else {
                     if (!rounds[roundIndex].didWin) {
                         setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}".`);
@@ -111,6 +127,8 @@ const SolverProvider = ({children}) => {
                 
             }
         }, [currentRound]);
+
+    
 
     useEffect(() => {
         if (!userRoundFinished && solveMode === 'user') {

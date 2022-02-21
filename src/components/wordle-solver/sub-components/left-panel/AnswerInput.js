@@ -32,7 +32,7 @@ const AnswerInput = () => {
             if (solveWord === null) {
                 setErrorMessage("");
             } else if (!doesWordExist) {
-                if (checkWordleCommon) {
+                if (checkWordleCommon && solveMode === "computer") {
                     setErrorMessage('Word is not common. Uncheck "words are common" to use all.');
                 } else {
                     setErrorMessage("Not a valid word. Please choose another.");

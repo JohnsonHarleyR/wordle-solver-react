@@ -6,8 +6,8 @@ const ChooseMode = () => {
 
     const computerButton = useRef();
     const userButton = useRef();
-    const {solveMode, setSolveMode, rounds, 
-        setUserIsGuessing, setUserRound,
+    const {solveMode, setSolveMode, rounds, setCurrentRound,
+        setUserIsGuessing, setUserRound, userIsGuessing, setUserRoundFinished,
         setUserMessage, setRoundIndex} = useContext(SolverContext);
 
     const computerMode = () => {
@@ -17,7 +17,7 @@ const ChooseMode = () => {
 
     const userMode = () => {
         setSolveMode('user');
-        setUserMessage("Your turn to guess!\n(Once you guess, the round will begin.)");
+        setUserMessage("Your turn! Once you guess, the round will begin.");
     }
 
     useEffect(() => {
@@ -25,7 +25,9 @@ const ChooseMode = () => {
             if (solveMode === "computer") {
                 setUserMessage("Enter a word for the computer to guess.");
             } else {
-                setUserMessage("Your turn to guess!\n(Once you guess, the round will begin.)");
+
+                    setUserMessage("Your turn! Once you guess, the round will begin.");
+
             }
         }
     }, [rounds]);
@@ -35,7 +37,9 @@ const ChooseMode = () => {
             computerButton.current.disabled = true;
             userButton.current.disabled = false;
             setUserRound(null);
+            setCurrentRound(null);
             setUserIsGuessing(false);
+            setUserRoundFinished(false);
         } else {
             computerButton.current.disabled = false;
             userButton.current.disabled = true;

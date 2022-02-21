@@ -144,6 +144,10 @@ const RoundChanger = () => {
             !userIsGuessing) {
                 nextButton.current.disabled = false;
             }
+            if (userRoundFinished) {
+                prevButton.current.disabled = true;
+                nextButton.current.disabled = true;
+            }
     }
 
     useEffect(() => {
@@ -158,6 +162,15 @@ const RoundChanger = () => {
             determineButtonStates();
         }
     },[userIsGuessing, currentRound]);
+
+    useEffect(() => {
+        if (userRoundFinished) {
+            prevButton.current.disabled = true;
+            nextButton.current.disabled = true;
+        } else if (solveMode === "computer") {
+            determineButtonStates();
+        }
+    },[userRoundFinished]);
 
     return (
         <Section>

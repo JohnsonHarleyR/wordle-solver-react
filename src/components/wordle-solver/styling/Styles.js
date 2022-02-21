@@ -1,27 +1,23 @@
 import styled from "styled-components";
 
 export const Solver = styled.div`
-    border: 1px solid cyan;
     display: flex;
     flex-direction: column;
 `;
 
 export const Top = styled.div`
-    border: 1px solid cyan;
     display: flex;
     width: 100%;
     justify-content: center;
 `;
 
 export const Lower = styled.div`
-    border: 1px solid cyan;
     display: flex;
     justify-content: center;
 `;
 
 export const SidePanel = styled.div`
     width: 250px;
-    border: 1px solid cyan;
     display: flex;
     flex-direction: column;
 `;
@@ -198,9 +194,10 @@ export const Input = styled.input`
 `;
 
 export const Check = styled.input`
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
+    background-color: yellow;
+    :checked {
+        background-color: #DAA520;
+    }
 `;
 
 export const Stats = styled(Section)`
@@ -229,7 +226,6 @@ export const StatWrapper = styled.div`
 export const Solution = styled.div`
     padding-left: 10px;
     padding-right: 10px;
-    border: 1px solid cyan;
     max-width: 300px;
 `;
 

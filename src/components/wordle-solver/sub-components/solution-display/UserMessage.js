@@ -20,9 +20,9 @@ const UserMessage = () => {
             // // get a new word if they want to start again
             // getRandomAnswer(setCorrectAnswer);
         } else if (userRoundFinished && solveMode === 'user') {
-                newUserRoundButton.current.style.display = "block";
+            newUserRoundButton.current.style.display = "block";
                 if (userRound !== null && !userRound.didWin) {
-                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}".`);
+                    setUserMessage(`The answer was "${userRound.correctAnswer}".`);
                 } else {
                     setUserMessage(`Winner!`);
                 }

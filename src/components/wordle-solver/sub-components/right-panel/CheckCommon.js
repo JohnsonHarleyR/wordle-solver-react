@@ -1,8 +1,9 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { SolverContext } from '../../SolverContext';
-import { Section, CheckSection, CheckWords } from '../../styling/Styles';
+import { Section, CheckSection, CheckWords, Check } from '../../styling/Styles';
 import { getCommonWordleWords } from 
 '../../logic/solve-wordles/word-banks/CommonWordleWords';
+import '../../styling/css-styles.css';
 
 export const CheckCommon = () => {
 
@@ -41,7 +42,7 @@ export const CheckCommon = () => {
         <Section>
             <CheckSection>
                 <input type="checkbox" ref={checkRef}
-                onChange={changeStatus}/>
+                onChange={changeStatus} className="check"/>
                 <CheckWords>
                 <sup>words are common</sup>
                     <a href="" onClick={download} style={{fontSize: "8.5px"}}>
