@@ -9,7 +9,7 @@ const RoundChanger = () => {
     const nextButton = useRef();
     const {rounds, roundIndex, setRoundIndex,
          resetRounds, userIsGuessing, userRound,
-        setCurrentRound, userRoundFinished,
+        setCurrentRound, userRoundFinished, solveMode,
         currentRound, setUserMessage} = useContext(SolverContext);
 
     const nextRound = () => {
@@ -50,7 +50,7 @@ const RoundChanger = () => {
                 if (!rounds[roundIndex].didWin) {
                     setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}"`);
                 } else {
-                    setUserMessage(`Winner.`);
+                    setUserMessage(`Winner!`);
                 }
             } else {
                 setRoundIndex(roundIndex - 1);
@@ -64,6 +64,7 @@ const RoundChanger = () => {
                 setRoundIndex(rounds.length - 1);
             } else {
                 setCurrentRound(userRound)
+                setUserMessage(`Play a round yourself!`);
             }
         } else if (roundIndex === 0) {
                 setRoundIndex(rounds.length - 1);
@@ -100,7 +101,21 @@ const RoundChanger = () => {
     }
 
     const determineButtonStates = () => {
-        if (roundIndex !== null) {
+        if (rounds != null && rounds.length === 1) {
+            if (solveMode === "computer") {
+                prevButton.current.disabled = true;
+            nextButton.current.disabled = true;
+            } else {
+                if (currentRound === userRound) {
+                    prevButton.current.disabled = false;
+                nextButton.current.disabled = true;
+                } else {
+                    prevButton.current.disabled = true;
+                nextButton.current.disabled = false;
+                }
+
+            }
+        } else if (roundIndex !== null) {
             prevButton.current.disabled = false;
             nextButton.current.disabled = false;
 

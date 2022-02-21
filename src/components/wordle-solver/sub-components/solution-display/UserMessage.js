@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { SolverContext } from '../../SolverContext';
-import { Section } from '../../styling/Styles';
+import { UserMsgSection, ButtonSection, 
+    SolutionText, RoundButton, Section } from '../../styling/Styles';
 import { getRandomAnswer } from '../../ApiCaller';
 
 const UserMessage = () => {
@@ -23,10 +24,13 @@ const UserMessage = () => {
     }, [userRoundFinished, solveMode]);
 
     return (
-        <div>
-            {userMessage}
-            <button ref={newUserRoundButton} onClick={startNewUserRound}>New Round</button>
-        </div>
+        <UserMsgSection>
+
+            <SolutionText>
+                {userMessage}
+            </SolutionText>
+            <RoundButton ref={newUserRoundButton} onClick={startNewUserRound}>New Round</RoundButton>
+        </UserMsgSection>
     );
 }
 

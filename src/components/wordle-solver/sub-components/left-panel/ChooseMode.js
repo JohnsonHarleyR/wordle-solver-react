@@ -12,7 +12,7 @@ const ChooseMode = () => {
 
     const computerMode = () => {
         setSolveMode('computer');
-        setUserMessage("Enter a word for the computer to guess.");
+        setUserMessage("Enter a new word for the computer.");
     }
 
     const userMode = () => {
@@ -42,7 +42,7 @@ const ChooseMode = () => {
 
             if (rounds.length !== 0) {
                 setRoundIndex(rounds.length - 1);
-                setUserMessage("Play a round yourself!");
+                setUserMessage("Your turn! Once you guess, the round will begin.");
             }
         }
     }, [solveMode]);

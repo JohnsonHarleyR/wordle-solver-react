@@ -46,6 +46,14 @@ export const Section = styled.div`
     text-align: center;
 `;
 
+export const UserMsgSection = styled(Section)`
+    margin-top: 6px;
+`;
+
+export const GuessSection = styled(Section)`
+    margin-top: 5px;
+`;
+
 export const CheckSection = styled.div`
     display: flex;
     width: 100%;
@@ -163,6 +171,25 @@ export const SelectButton = styled(Button)`
     background-color: #696969;
 `;
 
+export const GuessChangeButton = styled(Button)`
+    width: 55px;
+`;
+
+export const RoundButton = styled(Button)`
+    width: 150px;
+    align-self: center;
+    margin-top: 10px;
+`;
+
+export const SeeGuesses = styled.span`
+    padding: 4px;
+    padding-top: 4.6px;
+    padding-bottom: 7.2px;
+    border-top: 2px dotted #DAA520;
+    border-bottom: 2px dotted #DAA520;
+    height: 37px;
+`;
+
 export const Input = styled.input`
     width: 190px;
     height: 30px;
@@ -211,6 +238,14 @@ export const Row = styled.div`
     flex-direction: row;
     justify-content: space-evenly;
 
+`;
+
+export const SolutionText = styled.span`
+    width: 100%;
+    font-family: "Arial", sans-serif;
+    font-size: large;
+    padding-top: 5px;
+    color: #DAA520;
 `;
 
 export const LText = styled.div`

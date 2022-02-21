@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { SolverContext, getEmptyGuess } from '../../SolverContext';
+import { GuessSection, ButtonSection, GuessChangeButton, SeeGuesses } from '../../styling/Styles';
 
 const GuessChanger = () => {
 
@@ -56,13 +57,18 @@ const GuessChanger = () => {
     }
 
     return(
-        <>
+        <GuessSection>
+        <ButtonSection>
         <span ref={changeSpan}>
-            <button ref={prevButton} onClick={prevGuess}>Prev</button>
+            <GuessChangeButton ref={prevButton} onClick={prevGuess}>Prev</GuessChangeButton>
+            <SeeGuesses>
                 See Guesses
-            <button ref={nextButton} onClick={nextGuess}>Next</button>
+            </SeeGuesses>
+            <GuessChangeButton ref={nextButton} onClick={nextGuess}>Next</GuessChangeButton>
         </span>
-        </>
+        </ButtonSection>
+        </GuessSection>
+
     );
 }
 

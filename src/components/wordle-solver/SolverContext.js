@@ -60,11 +60,11 @@ const SolverProvider = ({children}) => {
     useEffect(() => {
         if (roundIndex !== null) {
             setCurrentRound(rounds[roundIndex]);
-            if (rounds[roundIndex].isFinished) {
+            if (rounds[roundIndex].isFinished && currentRound !== userRound) {
                 if (!rounds[roundIndex].didWin) {
-                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}"`);
+                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}".`);
                 } else {
-                    setUserMessage(`Winner.`);
+                    setUserMessage(`Winner!`);
                 }
             }
         }
@@ -101,7 +101,14 @@ const SolverProvider = ({children}) => {
         // user playing
         useEffect(() => {
             if (currentRound === userRound) {
-                //setUserMessage("Play a round yourself!");
+                setUserMessage("Play a round yourself!");
+            } else {
+                    if (!rounds[roundIndex].didWin) {
+                        setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}".`);
+                    } else {
+                        setUserMessage(`Winner!`);
+                    }
+                
             }
         }, [currentRound]);
 
