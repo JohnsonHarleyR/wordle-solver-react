@@ -76,6 +76,7 @@ const AnswerInput = () => {
             inputRef.current.value = "";
             inputRef.current.placeholder="Guess an answer";
         }
+        setErrorMessage("");
     }, [solveMode]);
 
     useEffect(() => { // TODO move starting a user round to method inside context
@@ -136,6 +137,10 @@ const AnswerInput = () => {
             }
         }
     }, [userIsGuessing]);
+
+    useEffect(() => {
+        setSolveWord(null);
+    }, [checkWordleCommon]);
 
     const solveForAnswer = (e) => {
         let newSolveWord = inputRef.current.value.toLowerCase().trim();
