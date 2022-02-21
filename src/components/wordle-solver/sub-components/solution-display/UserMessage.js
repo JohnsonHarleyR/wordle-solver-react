@@ -7,6 +7,7 @@ import { getRandomAnswer } from '../../ApiCaller';
 const UserMessage = () => {
 
     const {userMessage, solveMode, startNewUserRound, 
+        rounds, roundIndex, setUserMessage, userRound,
         userRoundFinished} = useContext(SolverContext);
 
     const newUserRoundButton = useRef();
@@ -19,8 +20,16 @@ const UserMessage = () => {
             // // get a new word if they want to start again
             // getRandomAnswer(setCorrectAnswer);
         } else if (userRoundFinished && solveMode === 'user') {
-            newUserRoundButton.current.style.display = "block";
-        }
+                newUserRoundButton.current.style.display = "block";
+                if (userRound !== null && !userRound.didWin) {
+                    setUserMessage(`The answer was "${rounds[roundIndex].correctAnswer}".`);
+                } else {
+                    setUserMessage(`Winner!`);
+                }
+            }
+                
+        
+        
     }, [userRoundFinished, solveMode]);
 
     return (
