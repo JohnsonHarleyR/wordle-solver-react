@@ -1,6 +1,6 @@
-// const portNumber = "44320";
-// const startUrl = `https://localhost:${portNumber}`;
-const startUrl = `http://wordlesolverapi-dev.us-east-1.elasticbeanstalk.com`;
+//const portNumber = "44320";
+//const startUrl = `https://localhost:${portNumber}`;
+const startUrl = `//wordlesolverapi-dev.us-east-1.elasticbeanstalk.com`;
 
 export const getWordleGuesses = (correctAnswer, setFunction, isForContest) => {
     //console.log('getting guesses');
